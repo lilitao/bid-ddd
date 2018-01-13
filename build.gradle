@@ -3,7 +3,8 @@ buildscript {
 		springBootVersion = '1.5.9.RELEASE'
 	}
 	repositories {
-		mavenCentral()
+        mavenLocal()
+        mavenCentral()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -19,13 +20,14 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    mavenLocal()
+    mavenCentral()
 }
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.mockito:mockito-core:2.7.22')
     compile('mysql:mysql-connector-java:5.1.25')
 
