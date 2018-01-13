@@ -2,7 +2,10 @@ package com.learning.dddbid.seller.web;
 
 import com.learning.dddbid.seller.application.SellerService;
 import com.learning.dddbid.seller.domain.model.Seller;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
