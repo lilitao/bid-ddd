@@ -1,1 +1,5 @@
 language: java
+notifications:
+  slack:
+    on_success: never
+    on_failure: always
