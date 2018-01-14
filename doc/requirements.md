@@ -13,3 +13,8 @@ AC2:
 Given I provide my user name and password, which is less than 6 characters
 When I register
 Then I can NOT registered as a seller.
+
+AC3:
+Given I register as a seller
+When I registered successfully
+Then I will received a email

@@ -1,6 +1,7 @@
 package com.learning.dddbid.seller.application;
 
 import com.learning.dddbid.seller.domain.model.Seller;
+import com.learning.dddbid.seller.infrastructure.EmailNotifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,9 @@ public class SellerService {
     @Autowired
     private SellerRepository repository;
 
+    @Autowired
+    private EmailNotifyService emailNotifyService;
+
     public SellerService(SellerRepository repository) {
         this.repository = repository;
     }
@@ -19,6 +23,8 @@ public class SellerService {
     public Seller register(String email, String userName, String password) {
         Seller seller = new Seller(email, userName, password);
 
-        return repository.save(seller);
+        Seller result = repository.save(seller);
+        emailNotifyService.sendRegisteredEmail(result.getEmail());
+        return result;
     }
 }

@@ -3,6 +3,7 @@ package com.learning.dddbid.seller;
 import com.learning.dddbid.seller.application.SellerRepository;
 import com.learning.dddbid.seller.application.SellerService;
 import com.learning.dddbid.seller.domain.exception.InvalidPasswordException;
+import com.learning.dddbid.seller.infrastructure.EmailNotifyService;
 import com.learning.dddbid.seller.repository.spring.SellerSpringRepository;
 import com.learning.dddbid.seller.repository.SellerJpaRepository;
 import com.learning.dddbid.seller.repository.entity.SellerEntity;
@@ -18,8 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {SellerRegisterTest.SellerRegisterTestConfiguration.class})
@@ -29,6 +29,9 @@ public class SellerRegisterTest {
 
     @Autowired
     private SellerSpringRepository repository;
+
+    @Autowired
+    private EmailNotifyService emailNotifyService;
 
     @Test
     public void should_register_seller() throws Exception {
@@ -58,6 +61,21 @@ public class SellerRegisterTest {
         sellerController.register(sellerInput);
     }
 
+    @Test
+    public void should_receive_email_notification_when_registered_successfully() throws Exception {
+        //Given
+        String email = "abcd@gmail.com";
+        String userName = "abcd";
+        String password = "123456";
+        SellRegisterInputModel sellerInput = new SellRegisterInputModel(email, userName, password);
+        when(repository.save(any(SellerEntity.class))).thenReturn(new SellerEntity(email, userName, password));
+
+        //When
+        sellerController.register(sellerInput);
+
+        //Then
+        verify(emailNotifyService, times(1)).sendRegisteredEmail(email);
+    }
 
     @Configuration
     public static class SellerRegisterTestConfiguration {
@@ -79,6 +97,11 @@ public class SellerRegisterTest {
         @Bean
         public SellerSpringRepository sellerEntityRepository() {
             return mock(SellerSpringRepository.class);
+        }
+
+        @Bean
+        public EmailNotifyService emailNotifyService() {
+            return mock(EmailNotifyService.class);
         }
     }
 }
