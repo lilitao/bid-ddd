@@ -1,5 +1,6 @@
 package com.learning.dddbid.seller.application;
 
+import com.learning.dddbid.infrastructure.LogExecutionTime;
 import com.learning.dddbid.seller.domain.model.Seller;
 import com.learning.dddbid.infrastructure.EmailNotifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,13 @@ public class SellerService {
         this.emailNotifyService = emailNotifyService;
     }
 
+    @LogExecutionTime
     public Seller register(String email, String userName, String password) {
         Seller seller = new Seller(email, userName, password);
 
         Seller result = repository.save(seller);
         emailNotifyService.sendRegisteredEmail(result.getEmail());
+
         return result;
     }
 }

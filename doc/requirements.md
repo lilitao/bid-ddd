@@ -18,3 +18,9 @@ AC3:
 Given I register as a seller
 When I registered successfully
 Then I will received a email
+
+### Story2. Add performance log
+
+As a operation dev
+I want to know how long a method running
+So that I can tuning the performance
