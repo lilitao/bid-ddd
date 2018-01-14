@@ -1,5 +1,6 @@
 package com.learning.dddbid.seller.application;
 
+import com.learning.dddbid.infrastructure.EmailNotifyService;
 import com.learning.dddbid.seller.domain.exception.InvalidPasswordException;
 import com.learning.dddbid.seller.domain.model.Seller;
 import org.junit.Test;
@@ -15,6 +16,8 @@ import static org.mockito.Mockito.when;
 public class SellerServiceTest {
     @Mock
     private SellerRepository repository;
+    @Mock
+    private EmailNotifyService emailNotifyService;
 
     SellerService service;
 
@@ -23,7 +26,7 @@ public class SellerServiceTest {
         String email = "abcd@gmail.com";
         String userName = "abcd";
         String password = "123456";
-        service = new SellerService(repository);
+        service = new SellerService(repository, emailNotifyService);
         when(repository.save(any(Seller.class))).thenReturn(new Seller(email, userName, password));
 
         Seller seller = service.register(email, userName, password);
@@ -36,7 +39,7 @@ public class SellerServiceTest {
         String email = "abcd@gmail.com";
         String userName = "abcd";
         String password = "1234";
-        service = new SellerService(repository);
+        service = new SellerService(repository, emailNotifyService);
 
         service.register(email, userName, password);
     }

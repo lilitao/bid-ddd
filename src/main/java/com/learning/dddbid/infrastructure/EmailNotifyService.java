@@ -1,4 +1,4 @@
-package com.learning.dddbid.seller.infrastructure;
+package com.learning.dddbid.infrastructure;
 
 import org.springframework.stereotype.Component;
 

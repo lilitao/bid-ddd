@@ -3,7 +3,7 @@ package com.learning.dddbid.seller;
 import com.learning.dddbid.seller.application.SellerRepository;
 import com.learning.dddbid.seller.application.SellerService;
 import com.learning.dddbid.seller.domain.exception.InvalidPasswordException;
-import com.learning.dddbid.seller.infrastructure.EmailNotifyService;
+import com.learning.dddbid.infrastructure.EmailNotifyService;
 import com.learning.dddbid.seller.repository.spring.SellerSpringRepository;
 import com.learning.dddbid.seller.repository.SellerJpaRepository;
 import com.learning.dddbid.seller.repository.entity.SellerEntity;
