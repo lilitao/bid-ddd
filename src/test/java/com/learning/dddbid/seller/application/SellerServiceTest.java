@@ -1,8 +1,7 @@
 package com.learning.dddbid.seller.application;
 
-import com.learning.dddbid.seller.domain.InvalidPasswordException;
+import com.learning.dddbid.seller.domain.exception.InvalidPasswordException;
 import com.learning.dddbid.seller.domain.model.Seller;
-import com.learning.dddbid.seller.repository.SellerRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -25,7 +24,7 @@ public class SellerServiceTest {
         String userName = "abcd";
         String password = "123456";
         service = new SellerService(repository);
-        when(repository.save(any())).thenReturn(new Seller(email, userName, password));
+        when(repository.save(any(Seller.class))).thenReturn(new Seller(email, userName, password));
 
         Seller seller = service.register(email, userName, password);
 

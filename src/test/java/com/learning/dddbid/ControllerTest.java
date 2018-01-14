@@ -1,4 +1,4 @@
-package com.learning.dddbid.web;
+package com.learning.dddbid;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

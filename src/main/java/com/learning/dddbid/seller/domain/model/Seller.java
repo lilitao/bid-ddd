@@ -1,6 +1,6 @@
 package com.learning.dddbid.seller.domain.model;
 
-import com.learning.dddbid.seller.domain.InvalidPasswordException;
+import com.learning.dddbid.seller.domain.exception.InvalidPasswordException;
 
 public class Seller {
     private final String email;
